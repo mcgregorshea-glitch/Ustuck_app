@@ -1336,22 +1336,7 @@
         if (e.target === $('settings-overlay')) Settings.close();
     });
 
-    $('toggle-rescue').addEventListener('change', async (e) => {
-        // Intercept native iOS toggle to ask for Screen Time permissions
-        if (e.target.checked && window.Capacitor && window.Capacitor.platform === 'ios') {
-            try {
-                // We use plugins over the window.Capacitor bridging boundary dynamically
-                const { ScreenTimePlugin } = window.Capacitor.Plugins;
-                if (ScreenTimePlugin) {
-                    const result = await ScreenTimePlugin.requestAuthorization();
-                    console.log("[Native Bridge] Screen Time Auth:", result);
-                }
-            } catch (err) {
-                console.error("[Native Bridge] Screen Time Auth Failed:", err);
-                // Depending on the UX, you could force the toggle back off here
-            }
-        }
-
+    $('toggle-rescue').addEventListener('change', (e) => {
         DistractionRescue.toggle(e.target.checked);
         Settings._syncUI();
     });
