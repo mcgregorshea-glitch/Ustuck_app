@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover, user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#08081a">
+  <meta name="description" content="Unstuck — Break through ADHD paralysis. One task at a time. Zero decision fatigue.">
+  <title>Unstuck — Task Activation</title>
+  <link rel="manifest" href="manifest.json">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="style.css?v=2">
+</head>
+
+<body>
+  <!-- Ambient background -->
+  <div class="ambient-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <div id="app">
+
+    <!-- ═══════════ CLEAN SLATE (Default Home) ═══════════ -->
+    <section id="screen-slate" class="screen active">
+      <div class="slate-content">
+        <div class="breathing-orb" id="breathing-orb">
+          <div class="orb-ring orb-ring-1"></div>
+          <div class="orb-ring orb-ring-2"></div>
+          <div class="orb-ring orb-ring-3"></div>
+          <div class="orb-core"></div>
+        </div>
+        <div class="orb-ripple-layer" id="orb-ripple-layer"></div>
+
+        <h1 class="slate-title" id="slate-title">One thing<br>at a time.</h1>
+        <p class="slate-subtitle" id="slate-subtitle">Whenever you're ready.</p>
+
+        <button class="btn-reveal" id="btn-reveal">
+          <span class="btn-reveal-icon">⚡</span>
+          <span class="btn-reveal-text">I'm stuck</span>
+        </button>
+
+        <button class="btn-vault-shortcut" id="btn-vault-shortcut">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 5v14M5 12h14" stroke-linecap="round" />
+          </svg>
+          <span>Brain dump</span>
+        </button>
+
+        <button class="btn-vault-shortcut btn-summary" id="btn-summary">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2" stroke-linecap="round" />
+            <rect x="9" y="3" width="6" height="4" rx="1" />
+            <path d="M9 12h6M9 16h4" stroke-linecap="round" />
+          </svg>
+          <span>Daily summary</span>
+        </button>
+      </div>
+
+      <!-- Completed count (non-punitive, only shows if > 0) -->
+      <div class="slate-stats" id="slate-stats"></div>
+
+      <!-- Long-press to enter admin -->
+      <div class="slate-logo" id="slate-logo">
+        <span class="logo-text">unstuck</span>
+      </div>
+
+      <!-- Settings gear -->
+      <button class="slate-settings-btn" id="btn-settings" aria-label="Settings">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="12" cy="12" r="3" />
+          <path
+            d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06A1.65 1.65 0 0 0 4.68 15a1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06A1.65 1.65 0 0 0 9 4.68a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06A1.65 1.65 0 0 0 19.4 9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"
+            stroke-linecap="round" stroke-linejoin="round" />
+        </svg>
+      </button>
+    </section>
+
+    <!-- ═══════════ THE VAULT (Brain Dump Input) ═══════════ -->
+    <section id="screen-vault" class="screen">
+      <header class="screen-header">
+        <button class="btn-back" id="vault-back">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5M12 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+        <h2 class="screen-title">The Vault</h2>
+        <div class="header-spacer"></div>
+      </header>
+
+      <div class="vault-content">
+        <p class="vault-instruction">Get it out of your head.<br>Type it. Let it go.</p>
+
+        <div class="vault-input-container">
+          <input type="text" class="vault-input" id="vault-input" placeholder="What's floating around in there?"
+            autocomplete="off" maxlength="200">
+          <button class="vault-submit" id="vault-submit">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <path d="M5 12h14M12 5l7 7-7 7" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+          </button>
+        </div>
+
+        <!-- Smart suggestion bar -->
+        <div class="suggestion-bar" id="suggestion-bar">
+          <span class="suggestion-label">Did you mean:</span>
+          <button class="suggestion-chip" id="suggestion-chip"></button>
+        </div>
+
+        <!-- Vaporize animation target -->
+        <div class="vault-vaporize-zone" id="vault-vaporize-zone"></div>
+
+        <p class="vault-hint">Press Enter to drop it in the vault</p>
+      </div>
+    </section>
+
+    <!-- ═══════════ THE REVEAL (One Task at a Time) ═══════════ -->
+    <section id="screen-reveal" class="screen">
+      <div class="reveal-content">
+        <div class="reveal-label">Your next move</div>
+        <div class="reveal-card" id="reveal-card">
+          <p class="reveal-task-text" id="reveal-task-text"></p>
+        </div>
+
+        <div class="reveal-actions">
+          <button class="reveal-btn reveal-btn-start" id="btn-start">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polygon points="5 3 19 12 5 21 5 3" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <span>Start</span>
+          </button>
+          <button class="reveal-btn reveal-btn-done" id="btn-done">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+              <polyline points="20 6 9 17 4 12" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <span>Done</span>
+          </button>
+          <button class="reveal-btn reveal-btn-snooze" id="btn-snooze">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 6v6l4 2" />
+            </svg>
+            <span>Later</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Nudge overlay -->
+      <div class="nudge-overlay" id="nudge-overlay">
+        <div class="nudge-pulse"></div>
+        <p class="nudge-text">Still here? You've got this. 💪</p>
+        <button class="nudge-dismiss" id="nudge-dismiss">I'm ready</button>
+      </div>
+    </section>
+
+    <!-- ═══════════ BODY DOUBLE OVERLAY ═══════════ -->
+    <div class="body-double-overlay" id="body-double-overlay">
+      <div class="body-double-header">
+        <div class="body-double-presence">
+        </div>
+        <button class="body-double-close" id="body-double-close">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <line x1="18" y1="6" x2="6" y2="18" stroke-linecap="round" />
+            <line x1="6" y1="6" x2="18" y2="18" stroke-linecap="round" />
+          </svg>
+        </button>
+      </div>
+
+      <div class="body-double-task">
+        <p class="body-double-label">Working on:</p>
+        <p class="body-double-task-text" id="body-double-task-text"></p>
+      </div>
+
+      <!-- Audio Visualizer -->
+      <div class="audio-visualizer" id="audio-visualizer">
+        <div class="viz-bar"></div>
+        <div class="viz-bar"></div>
+        <div class="viz-bar"></div>
+        <div class="viz-bar"></div>
+        <div class="viz-bar"></div>
+        <div class="viz-bar"></div>
+        <div class="viz-bar"></div>
+        <div class="viz-bar"></div>
+        <div class="viz-bar"></div>
+        <div class="viz-bar"></div>
+        <div class="viz-bar"></div>
+        <div class="viz-bar"></div>
+        <div class="viz-bar"></div>
+        <div class="viz-bar"></div>
+        <div class="viz-bar"></div>
+        <div class="viz-bar"></div>
+      </div>
+
+      <div class="body-double-controls">
+        <button class="bd-control-btn" id="bd-toggle-sound">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5" stroke-linecap="round" stroke-linejoin="round" />
+            <path d="M15.54 8.46a5 5 0 0 1 0 7.07" stroke-linecap="round" />
+            <path d="M19.07 4.93a10 10 0 0 1 0 14.14" stroke-linecap="round" />
+          </svg>
+          <span id="bd-sound-label">Café sounds</span>
+        </button>
+        <button class="bd-control-btn bd-done-btn" id="bd-done">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+            <polyline points="20 6 9 17 4 12" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+          <span>I'm done!</span>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- ═══════════ ADMIN MODE ═══════════ -->
+    <section id="screen-admin" class="screen">
+      <header class="screen-header">
+        <button class="btn-back" id="admin-back">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M19 12H5M12 19l-7-7 7-7" stroke-linecap="round" stroke-linejoin="round" />
+          </svg>
+        </button>
+        <h2 class="screen-title">Admin Mode</h2>
+        <div class="header-spacer"></div>
+      </header>
+
+      <div class="admin-content">
+        <p class="admin-info" id="admin-info"></p>
+        <div class="admin-list" id="admin-list"></div>
+        <div class="admin-empty" id="admin-empty">
+          <div class="empty-icon">📦</div>
+          <p class="empty-text">The vault is empty</p>
+          <p class="empty-subtext">Add some tasks with the brain dump!</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- ═══════════ SETTINGS PANEL ═══════════ -->
+    <div class="settings-overlay" id="settings-overlay">
+      <div class="settings-panel">
+        <div class="settings-header">
+          <h2 class="settings-title">Settings</h2>
+          <button class="btn-back" id="settings-close">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18" stroke-linecap="round" />
+              <line x1="6" y1="6" x2="18" y2="18" stroke-linecap="round" />
+            </svg>
+          </button>
+        </div>
+
+        <div class="settings-section">
+          <div class="settings-row">
+            <div class="settings-row-info">
+              <span class="settings-row-title">Distraction Rescue</span>
+              <span class="settings-row-desc">Get a nudge when you've been away too long</span>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="toggle-rescue">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+
+        <div class="settings-section rescue-options" id="rescue-options">
+          <p class="settings-label">Nudge me after</p>
+          <div class="delay-pills" id="delay-pills">
+            <button class="delay-pill" data-delay="0.5">30 sec</button>
+            <button class="delay-pill" data-delay="5">5 min</button>
+            <button class="delay-pill active" data-delay="15">15 min</button>
+            <button class="delay-pill" data-delay="30">30 min</button>
+          </div>
+        </div>
+
+        <div class="settings-section rescue-options" id="rescue-notif-section">
+          <div class="settings-row">
+            <div class="settings-row-info">
+              <span class="settings-row-title">Notifications</span>
+              <span class="settings-row-desc" id="notif-status">Permission needed</span>
+            </div>
+            <button class="notif-perm-btn" id="btn-notif-perm">Enable</button>
+          </div>
+        </div>
+
+        <div class="settings-section rescue-options">
+          <p class="settings-label">App Screen Time Limits</p>
+          <p class="settings-sublabel">Select an app to configure its individual limit</p>
+          <div class="distraction-chips" id="app-limits-container">
+            <button class="app-chip" data-app="tiktok"><span class="chip-icon">📱</span> <span
+                class="app-name">TikTok</span></button>
+            <button class="app-chip" data-app="instagram"><span class="chip-icon">📸</span> <span
+                class="app-name">Instagram</span></button>
+            <button class="app-chip" data-app="twitter"><span class="chip-icon">🐦</span> <span class="app-name">X /
+                Twitter</span></button>
+            <button class="app-chip" data-app="reddit"><span class="chip-icon">🟠</span> <span
+                class="app-name">Reddit</span></button>
+            <button class="app-chip" data-app="youtube"><span class="chip-icon">▶️</span> <span
+                class="app-name">YouTube</span></button>
+            <button class="app-chip" data-app="snapchat"><span class="chip-icon">👻</span> <span
+                class="app-name">Snapchat</span></button>
+            <button class="app-chip" data-app="pinterest"><span class="chip-icon">📌</span> <span
+                class="app-name">Pinterest</span></button>
+          </div>
+
+          <div class="app-limit-configurator" id="app-limit-configurator">
+            <div class="configurator-header">
+              <span class="configurator-title" id="configurator-title">Limit for TikTok</span>
+              <button class="configurator-close" id="configurator-close">✕</button>
+            </div>
+            <div class="delay-pills configurator-pills" id="app-limit-pills">
+              <button class="delay-pill" data-limit="5">5m</button>
+              <button class="delay-pill" data-limit="15">15m</button>
+              <button class="delay-pill" data-limit="30">30m</button>
+              <button class="delay-pill limit-none" data-limit="0">No limit</button>
+            </div>
+          </div>
+        </div>
+        <div class="settings-section">
+          <p class="settings-label">Color Theme</p>
+          <div class="color-palette" id="color-palette">
+            <button class="color-swatch active" data-theme="default" title="Indigo"
+              style="background: linear-gradient(135deg, #a78bfa, #5eead4);"></button>
+            <button class="color-swatch" data-theme="ocean" title="Ocean"
+              style="background: linear-gradient(135deg, #38bdf8, #818cf8);"></button>
+            <button class="color-swatch" data-theme="rose" title="Rose"
+              style="background: linear-gradient(135deg, #fb7185, #f472b6);"></button>
+            <button class="color-swatch" data-theme="forest" title="Forest"
+              style="background: linear-gradient(135deg, #34d399, #a3e635);"></button>
+            <button class="color-swatch" data-theme="sunset" title="Sunset"
+              style="background: linear-gradient(135deg, #fb923c, #fbbf24);"></button>
+          </div>
+        </div>
+
+        <div class="settings-section">
+          <div class="settings-row">
+            <div class="settings-row-info">
+              <span class="settings-row-title">Grayscale Mode</span>
+              <span class="settings-row-desc">Remove all color from the app</span>
+            </div>
+            <label class="toggle-switch">
+              <input type="checkbox" id="toggle-grayscale">
+              <span class="toggle-slider"></span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- ═══════════ DAILY SUMMARY OVERLAY ═══════════ -->
+    <div class="summary-overlay" id="summary-overlay">
+      <div class="summary-panel">
+        <div class="summary-header">
+          <h2 class="summary-title">Today's Summary</h2>
+          <button class="btn-back" id="summary-close">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+              <line x1="18" y1="6" x2="6" y2="18" stroke-linecap="round" />
+              <line x1="6" y1="6" x2="18" y2="18" stroke-linecap="round" />
+            </svg>
+          </button>
+        </div>
+        <div class="summary-body" id="summary-body"></div>
+        <div id="summary-remaining-wrapper" class="summary-remaining-wrapper">
+          <div class="summary-remaining" id="summary-remaining"></div>
+        </div>
+        <button class="btn-summary-check" id="btn-summary-check">Check if any tasks remain</button>
+      </div>
+    </div>
+
+    <!-- ═══════════ CONFETTI CANVAS ═══════════ -->
+    <canvas id="confetti-canvas"></canvas>
+
+  </div>
+
+  <script src="sounds.js"></script>
+  <script src="app.js?v=3"></script>
+</body>
+
+</html>

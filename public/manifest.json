@@ -1,0 +1,14 @@
+{
+  "name": "Unstuck — Task Activation",
+  "short_name": "Unstuck",
+  "description": "Break through ADHD paralysis. One task at a time. Zero decision fatigue.",
+  "start_url": "./index.html",
+  "display": "standalone",
+  "background_color": "#08081a",
+  "theme_color": "#08081a",
+  "orientation": "portrait",
+  "icons": [],
+  "permissions": [
+    "notifications"
+  ]
+}
